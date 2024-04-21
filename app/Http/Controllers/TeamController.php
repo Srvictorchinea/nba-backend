@@ -12,27 +12,26 @@ final class TeamController extends Controller
         return Team::all();
     }
 
-    public function show($id)
+    public function show(Team $team)
     {
-        return Team::find($id);
+        return $team;
     }
 
     public function store(Request $request)
     {
-        return Team::create($request->all());
+        $team = Team::create($request->all());
+        return response()->json($team, status: 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Team $team)
     {
-        $team = Team::findOrFail($id);
         $team->update($request->all());
-        return $team;
+        return response()->json($team, status: 200);
     }
 
-    public function remove($id)
+    public function remove(Request $request, Team $team)
     {
-        $team = Team::findOrfail($id);
         $team->delete();
-        return 204;
+        return response()->json(data: null, status: 204);
     }
 }
