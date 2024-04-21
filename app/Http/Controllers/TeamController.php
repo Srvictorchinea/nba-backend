@@ -29,7 +29,7 @@ final class TeamController extends Controller
         return $team;
     }
 
-    public function delete(Request $request, $id)
+    public function remove($id)
     {
         $team = Team::findOrfail($id);
         $team->delete();
